@@ -15,7 +15,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        run: cd gradle && ./gradlew build
+        run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
 
       - name: Release maven package
-        run: cd gradle && ./gradlew publish
+        run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
