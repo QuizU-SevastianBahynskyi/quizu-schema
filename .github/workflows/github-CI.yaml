@@ -40,7 +40,9 @@ jobs:
 
           chmod +x increment_version.sh
           VERSION=$(./increment_version.sh $version_type)
+          echo "$VERSION" > "VERSION"
           echo "::set-output name=version::$VERSION"
+          
 
   build:
     runs-on: ubuntu-latest
