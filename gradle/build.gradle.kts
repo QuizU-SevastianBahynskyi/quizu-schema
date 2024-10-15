@@ -61,8 +61,8 @@ publishing {
         maven {
             url = uri("https://maven.pkg.github.com/QUIZU-SevastianBahynskyi/quizu-schema")
             credentials {
-                username = System.getenv("GITHUB_ACTOR")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("QUIZ_GITHUB_ACTOR")
+                password = System.getenv("QUIZ_GITHUB_PACKAGES_TOKEN")
             }
         }
     }
