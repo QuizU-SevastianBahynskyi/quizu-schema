@@ -18,4 +18,7 @@ jobs:
         run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
 
       - name: Release maven package
+        env:
+          GITHUB_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
+          GITHUB_ACTOR: ${{ github.QUIZ_GITHUB_ACTOR }}
         run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
