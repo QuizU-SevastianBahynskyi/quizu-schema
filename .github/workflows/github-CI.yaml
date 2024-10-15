@@ -14,13 +14,8 @@ jobs:
           java-version: '21'
           distribution: 'adopt'
 
-      - name: Set up Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          gradle-version: '8.3'
-
       - name: Build with Gradle
-        run: ./gradlew build
+        run: cd gradle && ./gradlew build
 
       - name: Release maven package
-        run: ./gradlew publish
+        run: cd gradle && ./gradlew publish
