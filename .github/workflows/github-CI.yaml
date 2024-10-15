@@ -42,11 +42,13 @@ jobs:
           VERSION=$(./increment_version.sh $version_type)
           echo "$VERSION" > "VERSION"
           echo "::set-output name=version::$VERSION"
-          
+  
 
   build:
     runs-on: ubuntu-latest
     needs: increment_version
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -62,14 +64,6 @@ jobs:
         env:
           VERSION: ${{ needs.increment_version.outputs.version }}
 
-      - name: Release maven package
-        env:
-          GITHUB_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
-          GITHUB_ACTOR: ${{ github.QUIZ_GITHUB_ACTOR }}
-          VERSION: ${{ needs.increment_version.outputs.version }}
-        run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
-
-
       - name: Commit and push updated VERSION file
         run: |
           git config user.name "GitHub Action"
@@ -79,3 +73,10 @@ jobs:
           git push https://${{ secrets.ACCESS_TOKEN }}@github.com/QuizU-SevastianBahynskyi/quizu-schema.git HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Release maven package
+        env:
+          GITHUB_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
+          GITHUB_ACTOR: ${{ github.QUIZ_GITHUB_ACTOR }}
+          VERSION: ${{ needs.increment_version.outputs.version }}
+        run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
