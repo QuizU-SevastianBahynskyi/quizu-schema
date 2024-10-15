@@ -48,7 +48,7 @@ publishing {
 
             groupId = "com.quizu"
             artifactId = "quizu-schema"
-            version = "0.1.0"
+            version = System.getenv("VERSION")
 
             // Add the generated Kotlin files to the publication
             artifact("${project.buildDir}/libs/quizu-schema.jar") {

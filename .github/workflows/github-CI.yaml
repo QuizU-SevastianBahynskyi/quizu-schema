@@ -1,9 +1,46 @@
-on: [ push ]
+name: Build and Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      major_release:
+        description: 'Is it a major release?'
+        required: false
+        default: false
+        type: boolean
+      minor_release:
+        description: 'Is it a minor release?'
+        required: false
+        default: false
+        type: boolean
+  push:
+    branches:
+      - main
 
 jobs:
+  increment_version:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.increment_version.outputs.version }}
+    steps:
+      - name: Increment version
+        id: increment_version
+        run: |
+          version_type="patch"
+
+          if [ "${{ github.event.inputs.major_release }}" == "true" ]; then
+              version_type="major"
+          elif [ "${{ github.event.inputs.minor_release }}" == "true" ]; then
+              version_type="minor"
+          fi
+
+          chmod +x increment_version.sh
+          VERSION=$(./increment_version.sh $version_type)
+          echo "::set-output name=version::$VERSION"
+
   build:
     runs-on: ubuntu-latest
-
+    needs: increment_version
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -16,9 +53,23 @@ jobs:
 
       - name: Build with Gradle
         run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
+        env:
+          VERSION: ${{ needs.increment_version.outputs.version }}
 
       - name: Release maven package
         env:
           GITHUB_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.QUIZ_GITHUB_ACTOR }}
+          VERSION: ${{ needs.increment_version.outputs.version }}
         run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
+
+
+      - name: Commit and push updated VERSION file
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add VERSION
+          git commit -m "Update version to ${{ needs.increment_version.outputs.version }} [skip ci]"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
