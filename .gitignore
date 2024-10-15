@@ -1,3 +1,20 @@
+.env
+# Gradle specific files
+.gradle/
+build/
+
+# Ignore Gradle wrapper files
+gradle/wrapper/gradle-wrapper.properties
+gradle/wrapper/gradle-wrapper.jar
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore build output directories
+out/
+bin/
+
 # Logs
 logs
 *.log
@@ -128,3 +145,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
