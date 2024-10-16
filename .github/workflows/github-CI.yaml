@@ -40,7 +40,7 @@ jobs:
 
           chmod +x increment_version.sh
           VERSION=$(./increment_version.sh $version_type)
-          echo "::set-output name=version::$VERSION"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
   
 
   build:
@@ -54,6 +54,7 @@ jobs:
 
       - name: Update VERSION file
         run: |
+          VERSION=${{ needs.increment_version.outputs.version }}
           echo "New version should be: $VERSION"
           echo "$VERSION" > "VERSION"
       
