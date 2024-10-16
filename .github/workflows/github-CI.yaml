@@ -40,7 +40,6 @@ jobs:
 
           chmod +x increment_version.sh
           VERSION=$(./increment_version.sh $version_type)
-          echo "$VERSION" > "VERSION"
           echo "::set-output name=version::$VERSION"
   
 
@@ -53,16 +52,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v3
-        with:
-          java-version: '21'
-          distribution: 'adopt'
-
-      - name: Build with Gradle
-        run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
-        env:
-          VERSION: ${{ needs.increment_version.outputs.version }}
+      - name: Update VERSION file
+        run: echo "$VERSION" > "VERSION"
+      
 
       - name: Commit and push updated VERSION file
         run: |
@@ -73,6 +65,17 @@ jobs:
           git push https://${{ secrets.ACCESS_TOKEN }}@github.com/QuizU-SevastianBahynskyi/quizu-schema.git HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'adopt'
+
+      - name: Build with Gradle
+        run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
+        env:
+          VERSION: ${{ needs.increment_version.outputs.version }}
 
       - name: Release maven package
         env:
