@@ -17,4 +17,4 @@ At the moment the following package registries are supported:
 - NPM
 
 > _NOTE:_ The pipeline is triggered only when the changes are made to the `main` branch from the `quizu-backend` pipeline.  
-> (The author of commit in this case should be `github-actions[bot]`)
+> (The email of commit in this case should be `github-actions[bot]@users.noreply.github.com`)
