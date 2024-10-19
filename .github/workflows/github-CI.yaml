@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Log the trigger source
         run: |
-          echo "Triggered by repository [${{ github.event.client_payload.triggered_by.repository }}]
+          echo "Triggered by repository [${{ github.event.client_payload.triggered_by.repository }}]"
           echo "On commit [${{ github.event.client_payload.triggered_by.commit_sha }}]"
           echo "The link to commit: ${{ github.event.client_payload.triggered_by.commit_link }}"
 
@@ -27,14 +27,6 @@ jobs:
       - name: Increment version
         id: increment_version
         run: |
-          version_type="patch"
-
-          if [ "${{ github.event.inputs.major_release }}" == "true" ]; then
-              version_type="major"
-          elif [ "${{ github.event.inputs.minor_release }}" == "true" ]; then
-              version_type="minor"
-          fi
-
           chmod +x increment_version.sh
           VERSION=$(./increment_version.sh $version_type)
           echo "The version here: $VERSION;"

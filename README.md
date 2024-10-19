@@ -16,5 +16,5 @@ At the moment the following package registries are supported:
   - Kotlin and Java are bundled in the same package
 - NPM
 
-> _NOTE:_ The pipeline is triggered only when the changes are made to the `main` branch from the `quizu-backend` pipeline.  
-> (The email of commit in this case should be `github-actions[bot]@users.noreply.github.com`)
+> _NOTE:_ The pipeline can be triggered only by `quizu-backend` pipeline. The dispatched event from the `quizu-backend` pipeline does the job.  
+> Information about commit that triggered the pipeline is logged.
