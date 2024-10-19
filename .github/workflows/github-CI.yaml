@@ -28,7 +28,7 @@ jobs:
         id: increment_version
         run: |
           chmod +x increment_version.sh
-          VERSION=$(./increment_version.sh $version_type)
+          VERSION=$(./increment_version.sh patch)
           echo "The version here: $VERSION;"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
   
