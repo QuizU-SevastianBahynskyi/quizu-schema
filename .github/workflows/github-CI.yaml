@@ -13,9 +13,8 @@ on:
         required: false
         default: false
         type: boolean
-  push:
-    branches:
-      - main
+  repository_dispatch:
+    types: [update-schema]
 
 jobs:
   increment_version:
