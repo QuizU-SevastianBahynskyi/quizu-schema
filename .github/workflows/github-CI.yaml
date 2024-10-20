@@ -44,6 +44,7 @@ jobs:
 
       - name: Update VERSION file
         run: |
+          git pull
           VERSION=${{ needs.increment_version.outputs.version }}
           echo "New version should be: $VERSION"
           echo "$VERSION" > "VERSION"
