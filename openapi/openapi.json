@@ -12,6 +12,25 @@
     "description" : "Auto generated value"
   } ],
   "paths" : {
+    "/quiz" : {
+      "post" : {
+        "tags" : [ "Quiz Controller" ],
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Quiz"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "OK"
+          }
+        }
+      }
+    },
     "/user" : {
       "delete" : {
         "tags" : [ "User Controller" ],
@@ -98,6 +117,22 @@
   },
   "components" : {
     "schemas" : {
+      "AnswerOption" : {
+        "type" : "object",
+        "properties" : {
+          "answer" : {
+            "type" : "string"
+          },
+          "isCorrect" : {
+            "type" : "boolean"
+          }
+        }
+      },
+      "Date" : {
+        "format" : "date",
+        "type" : "string",
+        "example" : "2022-03-10"
+      },
       "LoginRequest" : {
         "type" : "object",
         "properties" : {
@@ -106,6 +141,68 @@
           },
           "password" : {
             "type" : "string"
+          }
+        }
+      },
+      "ObjectId" : {
+        "type" : "object",
+        "properties" : {
+          "timestamp" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "counter" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "randomValue1" : {
+            "format" : "int32",
+            "type" : "integer"
+          },
+          "randomValue2" : {
+            "type" : "integer"
+          },
+          "date" : {
+            "$ref" : "#/components/schemas/Date"
+          }
+        }
+      },
+      "Question" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "$ref" : "#/components/schemas/ObjectId"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "answerOptions" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AnswerOption"
+            }
+          }
+        }
+      },
+      "Quiz" : {
+        "type" : "object",
+        "properties" : {
+          "quizOwnerEmail" : {
+            "type" : "string"
+          },
+          "title" : {
+            "type" : "string"
+          },
+          "description" : {
+            "type" : "string"
+          },
+          "questions" : {
+            "uniqueItems" : true,
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/Question"
+            }
           }
         }
       },
