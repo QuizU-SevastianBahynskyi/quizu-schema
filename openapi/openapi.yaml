@@ -27,7 +27,13 @@ paths:
       - User Controller
       responses:
         "200":
-          description: OK
+          description: Deleted successfully
+        "404":
+          description: User is not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "401":
           description: Not Authorized
         "403":
@@ -44,9 +50,23 @@ paths:
               $ref: "#/components/schemas/UserAccountUpdateRequest"
       responses:
         "200":
-          description: OK
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        "404":
+          description: User is not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "401":
-          description: Not Authorized
+          description: Wrong password
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "403":
           description: Not Allowed
       security:
@@ -62,7 +82,23 @@ paths:
               $ref: "#/components/schemas/LoginRequest"
       responses:
         "200":
-          description: OK
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+        "404":
+          description: User is not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Wrong password
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
   /user/register:
     post:
       tags:
@@ -74,7 +110,17 @@ paths:
               $ref: "#/components/schemas/UserAccount"
       responses:
         "200":
-          description: OK
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                type: string
+        "400":
+          description: User already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     AnswerOption:
@@ -88,6 +134,13 @@ components:
       format: date
       type: string
       example: 2022-03-10
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
     LoginRequest:
       type: object
       properties:
@@ -137,6 +190,11 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/Question"
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
     UserAccount:
       type: object
       properties:
