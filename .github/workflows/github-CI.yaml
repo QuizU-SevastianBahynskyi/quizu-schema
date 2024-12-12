@@ -68,7 +68,11 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
+        run: |
+          ls -la
+          cd gradle
+          ls -la
+          chmod +x gradle/gradlew && cd gradle && ./gradlew build
         env:
           VERSION: ${{ needs.increment_version.outputs.version }}
 
@@ -77,11 +81,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.QUIZ_GITHUB_ACTOR }}
           VERSION: ${{ needs.increment_version.outputs.version }}
-        run: |
-          ls -la
-          cd gradle
-          ls -la
-          chmod +x gradle/gradlew && cd gradle && ./gradlew publish
+        run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
 
   build_node:
     runs-on: ubuntu-latest
