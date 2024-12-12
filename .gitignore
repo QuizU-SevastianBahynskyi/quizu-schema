@@ -3,6 +3,10 @@
 .gradle/
 build/
 
+/node/*
+/dist/
+.idea/
+
 # Ignore Gradle wrapper files
 gradle/wrapper/gradle-wrapper.properties
 gradle/wrapper/gradle-wrapper.jar
