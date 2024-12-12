@@ -77,7 +77,11 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
           GITHUB_ACTOR: ${{ github.QUIZ_GITHUB_ACTOR }}
           VERSION: ${{ needs.increment_version.outputs.version }}
-        run: chmod +x gradle/gradlew && cd gradle && ./gradlew publish
+        run: |
+          ls -la
+          cd gradle
+          ls -la
+          chmod +x gradle/gradlew && cd gradle && ./gradlew publish
 
   build_node:
     runs-on: ubuntu-latest
