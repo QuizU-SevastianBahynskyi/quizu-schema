@@ -68,11 +68,7 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Gradle
-        run: |
-          ls -la
-          cd gradle
-          ls -la
-          chmod +x gradle/gradlew && cd gradle && ./gradlew build
+        run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
         env:
           VERSION: ${{ needs.increment_version.outputs.version }}
 
