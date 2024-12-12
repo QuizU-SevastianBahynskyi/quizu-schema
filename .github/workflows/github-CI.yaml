@@ -102,9 +102,14 @@ jobs:
         run: |
           cd ./node/generated-node-package
           npm init -y
+          VERSION=${{ needs.increment_version.outputs.version }}
+          npm version $VERSION --no-git-tag-version
+
           npm install axios querystring
           npm install --save-dev typescript @types/axios @types/node
           npm set registry https://npm.pkg.github.com/
+          npm config set "@QuizU-SevastianBahynskyi:registry" "https://npm.pkg.github.com/"
+          
           echo packages.json
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}" > .npmrc
           echo "@QuizU-SevastianBahynskyi:registry=https://npm.pkg.github.com" >> .npmrc
