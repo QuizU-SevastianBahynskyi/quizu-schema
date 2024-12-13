@@ -111,7 +111,7 @@ publishing {
         }
     }
 
-    repositories {
+    repositories {  
         maven {
             url = uri("https://maven.pkg.github.com/QUIZU-SevastianBahynskyi/quizu-schema")
             credentials {
