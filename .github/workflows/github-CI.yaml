@@ -95,19 +95,18 @@ jobs:
 
       - name: Install packages and generate schema
         run: |
-          cd ./node
           npm install -g @openapitools/openapi-generator-cli
-          openapi-generator-cli generate -i ../openapi/openapi.yaml -g typescript-axios -o ./quizu-schema
+          openapi-generator-cli generate -i ./openapi/openapi.yaml -g typescript-axios -o node/quizu-schema
 
       - name: Prepare package for publishing
         run: |
-          cp ./node/packages.json ./node/quizu-schema 
-          cd ./node/quizu-schema
+          cp node/package.json node/quizu-schema 
+          cd node/quizu-schema
           npm version ${{ needs.increment_version.outputs.version }} --no-git-tag-version
 
       - name: Publish package
         run: |
-          cd ./node/quizu-schema
+          cd node/quizu-schema
           npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
