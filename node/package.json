@@ -15,5 +15,13 @@
   "bugs": {
     "url": "https://github.com/QuizU-SevastianBahynskyi/quizu-schema/issues"
   },
-  "homepage": "https://github.com/QuizU-SevastianBahynskyi/quizu-schema#readme"
+  "homepage": "https://github.com/QuizU-SevastianBahynskyi/quizu-schema#readme",
+  "dependencies": {
+    "axios": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/axios": "^0.14.0"
+  }
 }

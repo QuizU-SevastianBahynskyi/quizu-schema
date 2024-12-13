@@ -107,6 +107,7 @@ jobs:
       - name: Publish package
         run: |
           cd node/quizu-schema
+          npm ci
           npm publish --registry https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.QUIZ_GITHUB_PACKAGES_TOKEN }}
