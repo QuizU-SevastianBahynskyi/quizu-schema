@@ -1,5 +1,5 @@
 {
-  "name": "quizu-schema",
+  "name": "@QuizU-SevastianBahynskyi/quizu-schema",
   "version": "1.0.0",
   "description": "API client for QuizU REST server",
   "main": "index.js",
