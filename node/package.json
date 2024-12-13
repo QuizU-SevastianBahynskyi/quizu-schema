@@ -1,0 +1,27 @@
+{
+  "name": "@QuizU-SevastianBahynskyi/quizu-schema",
+  "version": "1.0.0",
+  "description": "API client for QuizU REST server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QuizU-SevastianBahynskyi/quizu-schema.git"
+  },
+  "author": "Sevastian Bahynskyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/QuizU-SevastianBahynskyi/quizu-schema/issues"
+  },
+  "homepage": "https://github.com/QuizU-SevastianBahynskyi/quizu-schema#readme",
+  "dependencies": {
+    "axios": "^1.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/axios": "^0.14.0"
+  }
+}
