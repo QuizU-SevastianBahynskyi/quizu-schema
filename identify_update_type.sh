@@ -2,12 +2,7 @@
 
 path_to_spec="./openapi/openapi.yaml"
 
-if [ "${GITHUB_EVENT_NAME}" == "workflow_dispatch" ]; then
-    SHOULD_PUBLISH=true
-    exit 0
-fi
-
-if [[ $(git diff --quiet HEAD~1 -- "$path_to_spec") ]]; then
+if [[ $(git diff --quiet HEAD -- "$path_to_spec") ]]; then
     SHOULD_PUBLISH=false
     exit 0
 fi
@@ -15,8 +10,8 @@ fi
 SHOULD_PUBLISH=true
 
 # Calculate the volume of changes
-diff_volume=$(git diff HEAD~1 -- "$path_to_spec" | tr -d ' \t\n\r' | wc -c)
-old_spec_volume=$(git show HEAD~1:"$path_to_spec" | tr -d ' \t\n\r' | wc -c)
+diff_volume=$(git diff HEAD -- "$path_to_spec" | tr -d ' \t\n\r' | wc -c)
+old_spec_volume=$(git show HEAD:"$path_to_spec" | tr -d ' \t\n\r' | wc -c)
 
 # Avoid division by zero
 if [ "$old_spec_volume" -eq 0 ]; then
