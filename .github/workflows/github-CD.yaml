@@ -55,7 +55,7 @@ jobs:
         run: |
           path_to_spec="openapi/openapi.yaml"
 
-          if git diff --quiet origin/main -- "$path_to_spec"; then
+            if git diff --quiet origin/main -- .; then
             echo "No changes were made. Skipping commit. Moving on to the publishing of packages."
           else
             git config user.name "GitHub Action"
