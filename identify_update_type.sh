@@ -2,7 +2,7 @@
 
 path_to_spec="./openapi/openapi.yaml"
 
-if [[ $(git diff --quiet HEAD -- "$path_to_spec") ]]; then
+if git diff --quiet HEAD -- "$path_to_spec"; then
     SHOULD_PUBLISH=false
     exit 0
 fi

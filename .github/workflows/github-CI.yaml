@@ -53,7 +53,7 @@ jobs:
 
       - name: Commit and push the updated version
         run: |
-          if [[ $(git diff --quiet HEAD -- "$path_to_spec") ]]; then
+          if git diff --quiet origin/main -- "$path_to_spec"; then
             echo "No changes were made. Skipping commit. Moving on to the publishing of packages."
           else
             git config user.name "GitHub Action"
