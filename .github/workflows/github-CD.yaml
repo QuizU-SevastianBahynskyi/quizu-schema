@@ -109,7 +109,7 @@ jobs:
 
       - name: Prepare package for publishing
         run: |
-          cp node/packages.json node/quizu-schema
+          cp node/package.json node/quizu-schema
           cp node/.npmrc node/quizu-schema
           cd node/quizu-schema
           echo "Version: ${{ needs.update_version.outputs.version }}"
