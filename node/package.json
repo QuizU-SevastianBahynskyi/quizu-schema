@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
   },
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "API client for QuizU REST server",
   "main": "index.js",
   "scripts": {
