@@ -1,5 +1,8 @@
 {
   "name": "@QuizU-SevastianBahynskyi/quizu-schema",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "version": "0.1.14",
   "description": "API client for QuizU REST server",
   "main": "index.js",
