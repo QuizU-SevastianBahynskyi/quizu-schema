@@ -33,5 +33,6 @@ NEW_VERSION="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
 echo "$NEW_VERSION" >VERSION
 jq ".version = \"$NEW_VERSION\"" ./node/package.json >tmp.json && mv tmp.json ./node/package.json
 
+echo "NEW_VERSION=$NEW_VERSION" >>$GITHUB_ENV
 echo "version=$NEW_VERSION" >>$GITHUB_OUTPUT
 echo "Updated version to $NEW_VERSION"

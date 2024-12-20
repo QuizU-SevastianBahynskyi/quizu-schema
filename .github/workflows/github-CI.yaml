@@ -38,8 +38,8 @@ jobs:
           if [ ${{ github.event_name }} == "repository_dispatch" ]; then
             ./identify_update_type.sh
           else
-            UPDATE_TYPE="patch"
-            SHOULD_PUBLISH="true"
+            echo "UPDATE_TYPE=patch" >> $GITHUB_ENV
+            echo "SHOULD_PUBLISH=true" >> $GITHUB_ENV
           fi
 
       - name: Increment version
@@ -53,6 +53,8 @@ jobs:
 
       - name: Commit and push the updated version
         run: |
+          path_to_spec="openapi/openapi.yaml"
+
           if git diff --quiet origin/main -- "$path_to_spec"; then
             echo "No changes were made. Skipping commit. Moving on to the publishing of packages."
           else

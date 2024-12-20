@@ -3,11 +3,11 @@
 path_to_spec="./openapi/openapi.yaml"
 
 if git diff --quiet HEAD -- "$path_to_spec"; then
-    SHOULD_PUBLISH=false
+    echo "SHOULD_PUBLISH=false" >>$GITHUB_ENV
     exit 0
 fi
 
-SHOULD_PUBLISH=true
+echo "SHOULD_PUBLISH=true" >>$GITHUB_ENV
 
 # Calculate the volume of changes
 diff_volume=$(git diff HEAD -- "$path_to_spec" | tr -d ' \t\n\r' | wc -c)
@@ -30,3 +30,5 @@ elif (($(echo "$percentage_of_changes > 0.45" | bc -l))); then
 else
     UPDATE_TYPE="patch"
 fi
+
+echo "UPDATE_TYPE=$UPDATE_TYPE" >>$GITHUB_ENV
