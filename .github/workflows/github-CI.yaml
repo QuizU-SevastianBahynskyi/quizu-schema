@@ -34,22 +34,27 @@ jobs:
         run: git pull origin main
 
       - name: Identify the update type
-        run: ./identify_update_type.sh
+        run: |
+          if [ ${{ github.event_name }} == "repository_dispatch" ]; then
+            ./identify_update_type.sh
+          else
+            UPDATE_TYPE="patch"
+            SHOULD_PUBLISH="true"
+          fi
 
       - name: Increment version
         run: |
           if [ "$SHOULD_PUBLISH" == "true" ]; then
             ./update_version.sh
           else
-            echo "No changes were made. Skipping version increment."
+            echo "No changes were made. Skipping version increment and publishing."
             exit 0
           fi
 
       - name: Commit and push the updated version
         run: |
-          if [[ $(git diff --quiet HEAD~1 -- "$path_to_spec") ]]; then
-            echo "No changes were made. Skipping commit."
-            exit 0
+          if [[ $(git diff --quiet HEAD -- "$path_to_spec") ]]; then
+            echo "No changes were made. Skipping commit. Moving on to the publishing of packages."
           else
             git config user.name "GitHub Action"
             git config user.email "action@example.com"

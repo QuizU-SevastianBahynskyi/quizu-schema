@@ -31,7 +31,7 @@ NEW_VERSION="${version_parts[0]}.${version_parts[1]}.${version_parts[2]}"
 
 # Update the version in the VERSION file and package.json, the gradle should pick the version from the NEW_VERSION env var
 echo "$NEW_VERSION" >VERSION
-jq ".version = \"$new_version\"" ./node/package.json >tmp.json && mv tmp.json ./node/package.json
+jq ".version = \"$NEW_VERSION\"" ./node/package.json >tmp.json && mv tmp.json ./node/package.json
 
 echo "version=$NEW_VERSION" >>$GITHUB_OUTPUT
 echo "Updated version to $NEW_VERSION"
