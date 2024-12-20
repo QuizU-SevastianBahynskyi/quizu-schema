@@ -61,7 +61,7 @@ jobs:
             git config user.name "GitHub Action"
             git config user.email "action@example.com"
             git add .
-            git commit -m "Update version to $NEW_VERSION [skip ci]"
+            git commit -m "Update version to $NEW_VERSION [skip cd]"
             git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{github.repository}}.git HEAD:main
           fi
 
@@ -109,7 +109,7 @@ jobs:
 
       - name: Prepare package for publishing
         run: |
-          cp node/package.json node/quizu-schema 
+          cp -r node/* node/quizu-schema
           cd node/quizu-schema
           echo "Version: ${{ needs.increment_version.outputs.version }}"
           npm version ${{ needs.increment_version.outputs.version }} --no-git-tag-version
