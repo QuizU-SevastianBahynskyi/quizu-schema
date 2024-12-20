@@ -5,6 +5,11 @@ if [[ -z "$UPDATE_TYPE" ]]; then
     exit 1
 fi
 
+if [[ ! -s "VERSION" ]]; then
+    echo "Error: VERSION file is empty." >&2
+    exit 1
+fi
+
 current_version=$(cat VERSION)
 IFS='.' read -r -a version_parts <<<"$current_version"
 
