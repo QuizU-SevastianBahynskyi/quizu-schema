@@ -78,7 +78,7 @@ jobs:
       - name: Build with Gradle
         run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
         env:
-          VERSION: ${{ needs.increment_version.outputs.version }}
+          VERSION: ${{ needs.update_version.outputs.version }}
 
       - name: Release maven package
         run: |
@@ -87,7 +87,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
           GITHUB_ACTOR: ${{ github.actor }}
-          VERSION: ${{ needs.increment_version.outputs.version }}
+          VERSION: ${{ needs.update_version.outputs.version }}
 
   build_node:
     runs-on: ubuntu-latest
@@ -112,8 +112,8 @@ jobs:
           cp node/packages.json node/quizu-schema
           cp node/.npmrc node/quizu-schema
           cd node/quizu-schema
-          echo "Version: ${{ needs.increment_version.outputs.version }}"
-          npm version ${{ needs.increment_version.outputs.version }} --no-git-tag-version
+          echo "Version: ${{ needs.update_version.outputs.version }}"
+          npm version ${{ needs.update_version.outputs.version }} --no-git-tag-version
 
       - name: Publish package
         run: |
