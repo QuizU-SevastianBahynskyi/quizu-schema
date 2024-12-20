@@ -81,7 +81,7 @@ publishing {
         create<MavenPublication>("mavenKotlin") {
             groupId = "com.quizu"
             artifactId = "quizu-schema"
-            version = System.getenv("VERSION")
+            version = System.getenv("NEW_VERSION")
 
             // Use the generated JAR as an artifact
             artifact(generatedClassesJar.get())
