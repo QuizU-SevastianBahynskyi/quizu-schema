@@ -78,7 +78,7 @@ jobs:
       - name: Build with Gradle
         run: chmod +x gradle/gradlew && cd gradle && ./gradlew build
         env:
-          VERSION: ${{ needs.update_version.outputs.version }}
+          NEW_VERSION: ${{ needs.update_version.outputs.version }}
 
       - name: Release maven package
         run: |
@@ -87,7 +87,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
           GITHUB_ACTOR: ${{ github.actor }}
-          VERSION: ${{ needs.update_version.outputs.version }}
+          NEW_VERSION: ${{ needs.update_version.outputs.version }}
 
   build_node:
     runs-on: ubuntu-latest
