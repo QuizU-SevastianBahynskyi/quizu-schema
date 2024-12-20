@@ -89,7 +89,7 @@ publishing {
             pom {
                 name.set("QuizU Schema")
                 description.set("Schema generated from OpenAPI specifications for QuizU project")
-                url.set("https://github.com/QUIZU-SevastianBahynskyi/quizu-schema")
+                url.set("https://github.com/${System.getenv("GITHUB_REPOSITORY")}")
                 licenses {
                     license {
                         name.set("MIT License")

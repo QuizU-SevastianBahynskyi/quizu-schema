@@ -82,12 +82,13 @@ jobs:
 
       - name: Release maven package
         run: |
-          echo "Publishing version $VERSION"
+          echo "Publishing version $NEW_VERSION"
           chmod +x gradle/gradlew && cd gradle && ./gradlew publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
           GITHUB_ACTOR: ${{ github.actor }}
           NEW_VERSION: ${{ needs.update_version.outputs.version }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
 
   build_node:
     runs-on: ubuntu-latest
