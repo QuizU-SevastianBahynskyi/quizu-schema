@@ -119,10 +119,10 @@ jobs:
           echo "Version: ${{ needs.update_version.outputs.version }}"
           npm version ${{ needs.update_version.outputs.version }} --no-git-tag-version
 
-      - name: Publish package
+      - name: Publish packages
         run: |
           cd node/quizu-schema
           npm publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-          GITHUB_REPOSITORY_NAME: ${{ github.event.client_payload.triggered_by.repository }}
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
