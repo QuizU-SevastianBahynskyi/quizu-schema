@@ -37,7 +37,13 @@ jobs:
         run: ./identify_update_type.sh
 
       - name: Increment version
-        run: ./update_version.sh
+        run: |
+          if [ "$SHOULD_PUBLISH" == "true" ]; then
+            ./update_version.sh
+          else
+            echo "No changes were made. Skipping version increment."
+            exit 0
+          fi
 
       - name: Commit and push the updated version
         run: |
