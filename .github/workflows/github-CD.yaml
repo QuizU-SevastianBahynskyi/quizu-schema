@@ -27,7 +27,7 @@ jobs:
     permissions:
       contents: write
     outputs:
-      version: ${{ steps.set_version.outputs.new_version }}
+      version: ${{ steps.set_version.outputs.version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
