@@ -109,7 +109,8 @@ jobs:
 
       - name: Prepare package for publishing
         run: |
-          cp -r node/* node/quizu-schema
+          cp node/packages.json node/quizu-schema
+          cp node/.npmrc node/quizu-schema
           cd node/quizu-schema
           echo "Version: ${{ needs.increment_version.outputs.version }}"
           npm version ${{ needs.increment_version.outputs.version }} --no-git-tag-version
