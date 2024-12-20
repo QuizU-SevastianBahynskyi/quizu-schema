@@ -41,3 +41,5 @@ jq ".version = \"$NEW_VERSION\"" ./node/package.json >tmp.json && mv tmp.json ./
 echo "NEW_VERSION=$NEW_VERSION" >>$GITHUB_ENV
 echo "version=$NEW_VERSION" >>$GITHUB_OUTPUT
 echo "Updated version to $NEW_VERSION"
+echo "VERSION file: $(cat VERSION)"
+echo "package.json file: $(jq . ./node/package.json)"
